@@ -1,5 +1,5 @@
 const { extractTasksFromAI } = require("../ai-services/processors/taskProcessor");
-
+const Task = require("../models/Tasks");
 const generateTaskId = () => {
   return `TASK-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 };
@@ -104,7 +104,8 @@ try {
       source: source,
       confidence: calculateConfidence(task)
   }));
-
+  
+  await Task.insertMany(formattedTasks);
   return { tasks: formattedTasks };
 };
 

@@ -7,6 +7,6 @@ app.use(cors());
 app.use(express.json());
 
 //routes
-const taskRoutes =  require('./routes/taskRoutes');
+const taskRoutes = require("./routes/taskRoutes");
 app.use('/api/tasks',taskRoutes);
 module.exports=app;
