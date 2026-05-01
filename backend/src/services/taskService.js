@@ -17,16 +17,45 @@ const inferPriority = (text) => {
   return "Medium";
 };
 
-// nomalize deadline
-const normalizeDeadline = (deadline) => {
-  if (!deadline) return "No deadline";
+// parse deadline
+const parseDeadline = (deadline) => {
+  if (!deadline) return null;
 
-  const d = deadline.toLowerCase();
+  const text = deadline.toLowerCase();
+  const now = new Date();
 
-  if (d.includes("asap")) return "Immediate";
-  if (d.includes("later")) return "Low priority timeline";
+  // TODAY
+  if (text.includes("today")) return now;
 
-  return deadline;
+  // TOMORROW
+  if (text.includes("tomorrow")) {
+    const t = new Date();
+    t.setDate(now.getDate() + 1);
+    return t;
+  }
+
+  //  WEEKDAYS SUPPORT
+  const days = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+
+  for (let i = 0; i < days.length; i++) {
+    if (text.includes(days[i])) {
+      const targetDay = i;
+      const currentDay = now.getDay();
+
+      let diff = targetDay - currentDay;
+
+      if (diff <= 0) diff += 7; // next week
+
+      const targetDate = new Date();
+      targetDate.setDate(now.getDate() + diff);
+
+      return targetDate;
+    }
+  }
+
+  // NORMAL DATE
+  const parsed = new Date(deadline);
+  return isNaN(parsed) ? null : parsed;
 };
 
 //remove duplicates
@@ -94,8 +123,8 @@ try {
      assigned_by: task.assigned_by?.trim()
       ? task.assigned_by
       : "System",
-
-     deadline: normalizeDeadline(task.deadline),
+     
+     deadline: parseDeadline(task.deadline),
 
      priority: task.priority?.trim()
       ? task.priority

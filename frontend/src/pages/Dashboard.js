@@ -18,7 +18,7 @@ const Dashboard= ({tasks,refreshTasks}) => {
 
       <div className="toolbar">
         <div className="search-wrap">
-          <span className="search-icon"><Icon name="search" size={14}/></span>
+         <Icon name="search" size={18}/>
           <input className="search-input" placeholder="Search tasks..." value={search} onChange={e => setSearch(e.target.value)}/>
         </div>
         <div className="filter-tabs">
@@ -29,6 +29,7 @@ const Dashboard= ({tasks,refreshTasks}) => {
             </button>
           ))}
         </div>
+         
       </div>
 
       <div className="task-grid">

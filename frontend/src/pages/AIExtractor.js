@@ -1,116 +1,6 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { useToast } from "../context/ToastContext";
 import { showToastGlobal}  from "../components/ToastContainer";
 import Icon from "../components/Icon";
-
-// const AIExtractor = () => {
-//       const [text, setText] = useState("");
-//     //  const [tasks, setTasks] = useState([]); 
-//       const [loading, setLoading] = useState(false);
-//       const [error, setError] = useState("");
-//       const [aiTyping, setAiTyping] = useState(false);
-//       const [toast, setToast] = useState(null);
-//      const navigate = useNavigate();
-//      const { showToast } = useToast();
-
-// const handleSubmit = async () => {
-//     if (!text.trim()) return;
-
-//     try {
-//       setLoading(true);
-//       setError("");
-//       setAiTyping(true); //  animation start
-
-//       const response = await fetch("http://localhost:5000/api/tasks/extract", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({ text, source: "manual" })
-//       });
-
-//       const data = await response.json();
-
-//       if (!data.success) {
-//         throw new Error("Failed to extract tasks");
-//       }
-
-//     //   const res = await fetch("http://localhost:5000/api/tasks");
-//     //   const dbData = await res.json();
-
-//     //   setTasks(dbData.tasks);
-//     //   setText("");
-//     showToast("Tasks added successfully!", "success");
-//     setTimeout(() => {
-//       navigate("/");
-//     }, 2000);
-     
-//     }catch {
-//         console.error(error);
-//     showToast("Append Task failed", "error");
-//   }finally {
-//        setLoading(false);
-//       setTimeout(() => {
-//        setAiTyping(false);
-//          }, 1200); 
-//     }
-//   };
-//   return (
-//     <div className="input-box">
-
-//   <div className="input-header">
-//     <span className="input-title">AI Task Extractor</span>
-//   </div>
-//          {aiTyping && (
-//   <div className="task-grid">
-//     {[1, 2, 3].map((i) => (
-//       <div key={i} className="task-skeleton">
-//         <div className="skeleton-title"></div>
-//         <div className="skeleton-line"></div>
-//         <div className="skeleton-line short"></div>
-//       </div>
-//     ))}
-//   </div>
-// )}
-// <textarea
-//   className="input-textarea"
-//   placeholder="Paste meeting notes..."
-//   value={text}
-//   onChange={(e) => setText(e.target.value)}
-//   onKeyDown={(e) => {
-//     if (e.key === "Enter" && e.ctrlKey) {
-//       handleSubmit();
-//     }
-//   }}
-// />
-// {toast && (
-//   <Toast
-//     message={toast.message}
-//     type={toast.type}
-//     onClose={() => setToast(null)}
-//   />
-// )}
-
-//   <div className="input-footer">
-//     <span className="hint-text">AI will extract actionable tasks</span>
-
-//        <button className="submit-btn" onClick={handleSubmit} disabled={loading}>
-//   {loading ? (
-//     <span className="loading-content">
-//       <span className="dot"></span>
-//       <span className="dot"></span>
-//       <span className="dot"></span>
-//     </span>
-//   ) : (
-//     "Extract Tasks →"
-//   )}
-// </button>
-//   </div>
-
-// </div>
-//   );
-// };
 
 const API = "http://localhost:5000/api/tasks";
 const AIExtractor = ({ onExtracted }) => {
@@ -131,10 +21,12 @@ const AIExtractor = ({ onExtracted }) => {
       const data = await res.json();
       if (!data.success) throw new Error();
       showToastGlobal("Tasks extracted successfully!", "success");
+      onExtracted();
       setText("");
       setTimeout(() => { onExtracted(); }, 1200);
     } catch {
       showToastGlobal("Extraction failed", "error");
+      
     } finally {
       setLoading(false);
       setTimeout(() => setAiTyping(false), 1200);

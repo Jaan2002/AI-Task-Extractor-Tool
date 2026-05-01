@@ -36,7 +36,7 @@ const Tasks = ({tasks,refreshTasks}) => {
 
       <div className="tasks-filters">
         <div className="search-wrap" style={{maxWidth:"300px"}}>
-          <span className="search-icon"><Icon name="search" size={14}/></span>
+          <Icon name="search" size={18}/>
           <input className="search-input" placeholder="Search..." value={search} onChange={e=>setSearch(e.target.value)}/>
         </div>
         <div className="filter-tabs">

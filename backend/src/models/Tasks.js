@@ -4,7 +4,10 @@ const taskSchema = new mongoose.Schema({
   title: String,
   assigned_to: String,
   assigned_by: String,
-  deadline: String,
+  deadline: {
+  type: Date,
+  default: null
+  },
   priority: String,
   source: String,
   confidence: String,

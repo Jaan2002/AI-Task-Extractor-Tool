@@ -23,7 +23,13 @@ const Topbar = ({ page, setPage }) => {
                 <Icon name="bell" size={16}/>
                 <span className="notif-badge">3</span>
               </div>
-              <div className="avatar" style={{cursor:"pointer"}}>JS</div>
+              <div  style={{cursor:"pointer"}}>
+                <img
+                 src="https://api.dicebear.com/7.x/adventurer/svg?seed=Suzzy&gender=female%22"
+                className="avatar-img"
+               />
+               
+              </div>
             </div>
           </div>
   );

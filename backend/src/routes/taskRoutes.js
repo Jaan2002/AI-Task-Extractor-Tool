@@ -19,11 +19,10 @@ router.post("/extract", async (req, res) => {
     const { text, source } = req.body;
 
     const result = await processText(text, source);
-    const createdTasks = await Task.insertMany(extractedTasks);
 
     res.json({
       success: true,
-      data: createdTasks
+      data: result.tasks
     });
 
   } catch (error) {

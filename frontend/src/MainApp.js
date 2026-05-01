@@ -37,6 +37,7 @@ const MainApp = () => {
         return <Analytics tasks={tasks} />;
       case "ai":
         return <AIExtractor onExtracted={() => {
+         fetchTasks();
           setPage("dashboard");
         }} />;
       default:
@@ -45,7 +46,7 @@ const MainApp = () => {
   };
 
   return (
-    <div className="app">
+    <div className="app" >
       <Sidebar page={page} setPage={setPage} />
 
       <div className="main">
